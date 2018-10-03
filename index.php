@@ -1,3 +1,11 @@
+<?php
+session_start();
+//0.外部ファイル読み込みログインしていないと閲覧できない関数（※この3行でログイン必須のページになる）
+include('functions.php');
+chk_ssid();
+?>
+
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>

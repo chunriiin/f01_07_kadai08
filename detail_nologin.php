@@ -1,8 +1,5 @@
 <?php
-session_start();
-//0.外部ファイル読み込みログインしていないと閲覧できない関数（※この3行でログイン必須のページになる）
-include('functions.php');
-chk_ssid();
+
 
 // getで送信されたidを取得
 $id = $_GET['id'];
@@ -10,6 +7,7 @@ echo "GET:".$id;
 
 
 //1.  DB接続します
+include('functions.php');
 $pdo=db_conn();
 
 
@@ -60,10 +58,11 @@ if($status==false){
    <fieldset>
     <legend>更新ページ</legend>
 
-    <label>本のタイトル：<input type="text" name="bookname" value="<?=$rs["bookname"]?>"></label><br>
-     <label>URL：<input type="text" name="url" value="<?=$rs["url"]?>"></label><br>
+    <p>本のタイトル：<?=$rs["bookname"]?></p>
+    <p>URL：<a href="<?=$rs["url"]?>">📙</a>
+
 <!-- textAreaの場合値の入れ方が異なる-->
-     <label>コメント<textArea name="comments" rows="4" cols="40" ><?=$rs["comments"]?></textArea></label><br>
+    <p>コメント:<?=$rs["comments"]?></p>
 
      <input type="submit" value="送信">
      <!-- idは変えたくない = ユーザーから見えないようにする(hidden)-->

@@ -1,12 +1,7 @@
 <?php
-session_start();
-//0.外部ファイル読み込みログインしていないと閲覧できない関数（※この3行でログイン必須のページになる）
-include('functions.php');
-chk_ssid();
-
 
 //1.  DB接続します
-
+include('functions.php');
 $pdo=db_conn();
 
 //２．データ登録SQL作成
@@ -25,25 +20,12 @@ if($status==false) {
   //http://php.net/manual/ja/pdostatement.fetch.php
   while( $result = $stmt->fetch(PDO::FETCH_ASSOC)){ 
     $view .= '<p>'.$result["date"].'</p>';
-    $view .= '<a href="detail.php?id='.$result["id"].'"target_"blank">';
-    $view .=$result['bookname'].'</a>';
+    $view .= '<a href="detail_nologin.php?id='.$result["id"].'"target_"blank">';
+    $view .= '<p>'.$result['bookname'].'</p>';
     $view .= '<a href="'.$result["url"].'">'."📙".'<br>'.'</a>';
     $view .= '<p>'.$result["comments"].'</p>';
-   
-   
-    $view .= '<a href="delete.php?id='.$result['id'].'">';  //削除用aタグを作成,マウスオーバーでIDが表示されるようになる
-    $view .= '［削除］';
-    $view .= '</a>';
   }
 }
-
-$view2="";
-if($_SESSION['kanri_flg']==1){
-  $view2 .= '<a class="navbar-brand" href="user_index.php">ユーザー登録</a>';
-  $view2 .= '<a class="navbar-brand" href="user_select.php">ユーザー一覧</a>';
-}
-
-
 
 ?>
 
@@ -69,24 +51,15 @@ if($_SESSION['kanri_flg']==1){
   <nav class="navbar navbar-default">
     <div class="container-fluid">
       <div class="navbar-header">
-      <a class="navbar-brand" href="index.php">HOME</a>
-      <a class="navbar-brand" href="select2.php">50音順</a>
-      <a class="navbar-brand" href="select3.php">登録順</a>
-      <a class="navbar-brand" href="select4.php">読みたい本</a>
-      <a class="navbar-brand" href="select5.php">読んだ本</a>
+      <a class="navbar-brand" href="login.php">ログイン画面</a>
 
-    
-     </div>
+      </div>
     </div>
   </nav>
 </header>
 <!-- Head[End] -->
 
 <!-- Main[Start] -->
-<div>
-    <div class="container jumbotron"><?=$view2?></div>
-</div>
-
 <div>
     <div class="container jumbotron"><?=$view?></div>
 </div>

@@ -30,8 +30,12 @@
      <label>名前：<input type="text" name="name"></label><br>
      <label>ログインID：<input type="text" name="lid"></label><br>
      <label>ログインパスワード：<input type="text" name="lpw"></label><br>
-     <label>ユーザータイプ：<input type="text" name="kanri_flg"></label><br>
-     <label>使用状況：<input type="text" name="life_flg"></label><br>
+     <label>ユーザータイプ：ユーザー<input type="checkbox" class="checkbox-input" name="kanri_flg" value=0>
+                          管理者<input type="checkbox" class="checkbox-input" name="kanri_flg" value=1><br>
+  
+     <label>使用状況：利用中<input type="checkbox" class="checkbox-input" name="life_flg" value=0>
+                    退会者<input type="checkbox" class="checkbox-input" name="life_flg" value=1><br>
+     
  
 
 

@@ -5,15 +5,19 @@
 
 //DB接続関数（PDO）
 function db_conn(){
-    try {
-      return new PDO('mysql:dbname=gs_f01_db07;charset=utf8;host=localhost','root','');
-    } catch (PDOException $e) {
-      exit('DbConnectError:'.$e->getMessage());
-    }
+  $dbname='gs_f01_db07';
+  try {
+    $pdo = new PDO('mysql:dbname='.$dbname.';charset=utf8;host=localhost','root','');
+  } catch (PDOException $e) {
+    exit('DbConnectError:'.$e->getMessage());
   }
+  return $pdo;
+}
   
+
   // テーブル名
-  $table = 'gs_bm_table';
+$table = 'gs_bm_table';
+$user_table = 'gs_user_table'; 
   
   //SQL処理エラー
   function errorMsg($stmt){
@@ -29,6 +33,19 @@ function db_conn(){
   function h($str){
     return htmlspecialchars($str, ENT_QUOTES, 'UTF-8');
   }
+  
+  
+  //SESSIONチェック＆リジェネレイト
+function chk_ssid(){
+  if(!isset($_SESSION['chk_ssid']) || $_SESSION['chk_ssid']!=session_id()){
+    exit('Login Error.');
+  }else{
+    session_regenerate_id(true);
+    $_SESSION['chk_ssid'] = session_id();
+  }
+}
+
+
 
 
 ?>
