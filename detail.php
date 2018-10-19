@@ -55,23 +55,33 @@ if($status==false){
 <!-- Head[End] -->
 
 <!-- Main[Start] -->
-<form method="post" action="update.php">
-  <div class="jumbotron">
+
+<div class="card" style="width: 900px;margin:auto;border:3px solid#e5e5e5;">
+<div class="card-body">
+<form method="post" action="update.php" enctype="multipart/form-data">
+  <div class="">
    <fieldset>
-    <legend>更新ページ</legend>
+    <legend>編集ページ</legend>
 
-    <label>本のタイトル：<input type="text" name="bookname" value="<?=$rs["bookname"]?>"></label><br>
-     <label>URL：<input type="text" name="url" value="<?=$rs["url"]?>"></label><br>
-<!-- textAreaの場合値の入れ方が異なる-->
-     <label>コメント<textArea name="comments" rows="4" cols="40" ><?=$rs["comments"]?></textArea></label><br>
+     <label>あなたの画像を入れてね<input type="file"  class="form-control"  name="upfile" accept="image/*" capture="camera">
+     <label>あなたの名前は?：<input type="text" name="bookname" value="<?=$rs["bookname"]?>"></label><br>
+     <label>みんなに伝えるひとことを入れてね：<textArea name="comments" rows="4" cols="40" ><?=$rs["comments"]?></textArea></label><br>
+     <label>SNSのURLを入れてね：<input type="text" name="url" value="<?=$rs["url"]?>"></label><br>
 
-     <input type="submit" value="送信">
-     <!-- idは変えたくない = ユーザーから見えないようにする(hidden)-->
-     <input type="hidden" name="id" value="<?=$rs["id"]?>">
+
+     <input type="submit" value="保存" class="btn btn-primary">
+      <!-- idは変えたくない = ユーザーから見えないようにする(hidden)-->
+      <input type="hidden" name="id" value="<?=$rs["id"]?>">
     </fieldset>
   </div>
 </form>
-<!-- Main[End] -->
+</div>
+</div>
+
+
+
+
+
 
 
 </body>

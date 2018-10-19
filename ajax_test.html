@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset=" UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <button id="btn">取得</button>
+    <form action="" method="post" id="post_form">
+        <input type="text" id="name" name="name" placeholder="name">
+        <input type="text" id="email" name="email" placeholder="email">
+        <textarea name="detail" id="detail" cols="30" rows="10" placeholder="detail"></textarea>
+        <button id="send" type="submit">送信</button>
+    </form>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+        $(window).on('load', function () {
+
+            $('#btn').on('click', function () {
+                $.ajax({
+                    type: 'GET',
+                    url: 'ajax_test.txt',
+                    datatype: 'html'
+                }).done(function (response, textStatus, xhr) {
+                    $('body').append(response);
+                }
+                );
+            });
+
+            $('#send').on('click', function () {
+                //一度ボタンを押すと押せないように
+                $('button').attr('disabled', true);
+                //FormDataよりフォームの中身を持ってくる
+                var input_value = new FormData($('#post_form')[0]);
+                $.ajax({
+                    type: 'post',
+                    url: 'ajax_post.php',
+                    data: input_value,
+                    //どんな形式で送るか
+                    dataType: 'json',
+                    processData: false,
+                    contentType: false
+                    //responseで戻ってきたjsonをconsoleに表示させることができるここは、画面表示にすることも可。
+                    //php側でechoで出力したものをresponseに入れることができる
+                }).done(function (response, textStatus, xhr) {
+                    alert('done');
+                    console.log(response);
+                }).fail(function (response, textStatus, xhr) {
+                    alert('fail');
+                    return false;
+                }).always(function () {
+                    $('input').val('');
+                    $('textarea').val('');
+                    //無効にしたボタンを復活
+                    $('button').attr('disabled', false);
+                });
+            });
+            // ajax構文
+            // $.ajax({
+            //     type: 'post',               //getかpostを指定．データを持ってくる場合はget
+            //     url: '*************.php',   //宛先のphpファイルを指定
+            //     data: {                     //オブジェクト形式で送るとphpファイルで$_data1[]でとれる
+            //         data1:'hoge',
+            //         data2:'fuga'
+            //     },
+            //     dataType: 'json',           //データの種類を指定．html,jsonなど
+            //     processData: false,         //送信のときにエラーが出たらつける
+            //     contentType: false          //送信のときにエラーが出たらつける
+            // }).done(function (response, textStatus, xhr) {
+            //     alert('done');              //成功時の処理
+            //     console.log(response);
+            // }).fail(function (response, textStatus, xhr) {
+            //     alert('fail');              //失敗時の処理
+            // }).always(function () {
+            //     alert('always');            //いつでも実行する処理
+            // });
+        });
+    </script>
+</body>
+
+</html>

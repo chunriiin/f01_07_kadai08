@@ -7,7 +7,7 @@
 function db_conn(){
   $dbname='gs_f01_db07';
   try {
-    $pdo = new PDO('mysql:dbname='.$dbname.';charset=utf8;host=localhost','root','');
+    $pdo = new PDO('mysql:dbname='.$dbname.';charset=utf8;host=localhost','root','admin');
   } catch (PDOException $e) {
     exit('DbConnectError:'.$e->getMessage());
   }
@@ -44,6 +44,18 @@ function chk_ssid(){
     $_SESSION['chk_ssid'] = session_id();
   }
 }
+
+//CSSの切り替え
+function style_change() {
+  ?>
+  <style type="text/css">
+   /* ここにCSSを追加 */
+   #id{
+     display:block;
+   }
+  </style>
+  <?php }
+
 
 
 

@@ -16,7 +16,7 @@
 <div class="container-fluid">
 <div class="navbar-header">
   <a class="navbar-brand" href="index.php">LOGIN</a>
-  <a class="navbar-brand" href="select_nologin.php">一覧画面（閲覧のみ）</a>
+  <!-- <a class="navbar-brand" href="select_nologin.php">一覧画面（閲覧のみ）</a> -->
 
 
 

@@ -24,16 +24,26 @@ if($status==false) {
   //Selectデータの数だけ自動でループしてくれる
   //http://php.net/manual/ja/pdostatement.fetch.php
   while( $result = $stmt->fetch(PDO::FETCH_ASSOC)){ 
-    $view .= '<p>'.$result["date"].'</p>';
+    
+   
+
+    $view .='<div class="card" style="width: 20rem;">';
+    
+    $view .='<img class="card-img-top" src="'.$result['image'].'" alt="Card image cap" style="height:100px;width:100px;border-radius: 50%;" >';
+    $view .= '<div class="card-body">';
+    $view .='<a href="select_02.php?id='.$result["id"].'"target_"blank" >'.$result['bookname'];
+    $view .= '</a>';
     $view .= '<a href="detail.php?id='.$result["id"].'"target_"blank">';
-    $view .=$result['bookname'].'</a>';
+    $view .='✏️</a>';
     $view .= '<a href="'.$result["url"].'">'."📙".'<br>'.'</a>';
     $view .= '<p>'.$result["comments"].'</p>';
-   
-   
     $view .= '<a href="delete.php?id='.$result['id'].'">';  //削除用aタグを作成,マウスオーバーでIDが表示されるようになる
-    $view .= '［削除］';
+ 
+    $view .= '削除';
     $view .= '</a>';
+    $view .= '</div>';
+    $view .= '</div>';
+
   }
 }
 
@@ -70,10 +80,9 @@ if($_SESSION['kanri_flg']==1){
     <div class="container-fluid">
       <div class="navbar-header">
       <a class="navbar-brand" href="index.php">HOME</a>
-      <a class="navbar-brand" href="select2.php">50音順</a>
-      <a class="navbar-brand" href="select3.php">登録順</a>
-      <a class="navbar-brand" href="select4.php">読みたい本</a>
-      <a class="navbar-brand" href="select5.php">読んだ本</a>
+      <?=$view2?>
+
+
 
     
      </div>
@@ -84,11 +93,11 @@ if($_SESSION['kanri_flg']==1){
 
 <!-- Main[Start] -->
 <div>
-    <div class="container jumbotron"><?=$view2?></div>
+    
 </div>
 
-<div>
-    <div class="container jumbotron"><?=$view?></div>
+<div style="display:flex;flex-direction: row;flex-wrap: wrap;">
+ <?=$view?>
 </div>
 <!-- Main[End] -->
 
